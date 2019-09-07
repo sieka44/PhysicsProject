@@ -3,6 +3,7 @@ extends Node2D
 var G = 400.0
 var velocity = Vector2(0,2)
 
+
 func acceleration(pos1, pos2, Gforce):
 	var direction = Vector2(pos1.x - pos2.x, pos1.y - pos2.y)
 	var lenght = sqrt(pow(direction.x, 2)+pow(direction.y, 2))

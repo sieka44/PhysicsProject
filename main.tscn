@@ -96,6 +96,7 @@ tracks/0/keys = {
 [node name="universe" type="Node"]
 
 [node name="spaceship" type="Node2D" parent="."]
+editor/display_folded = true
 position = Vector2( 426.518, -245.06 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
@@ -128,7 +129,6 @@ vframes = 3
 anims/thrust = SubResource( 1 )
 
 [node name="explosion" type="Sprite" parent="spaceship"]
-editor/display_folded = true
 texture = ExtResource( 5 )
 vframes = 4
 hframes = 4
@@ -144,6 +144,7 @@ anims/explode = SubResource( 2 )
 current = true
 
 [node name="galactic" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="planet" type="Node2D" parent="galactic"]
 position = Vector2( 497.977, -4.52203 )

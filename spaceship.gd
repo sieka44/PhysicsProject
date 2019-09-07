@@ -12,6 +12,7 @@ var orientation = 0
 var galactic = get_parent()
 var thrust   = 1
 var vector_to_mouse = Vector2( 0, 0 )
+var alive = true
 
 func _ready():
 	galactic = get_parent().get_node("galactic")
@@ -33,6 +34,9 @@ func _process( delta ):
 	position += velocity
 	$body.rotation = orientation
 	update()
+	if !alive:
+		$explosion/AnimationPlayer.play("explode")
+		velocity = Vector2(0, 0)
 
 func overwrite_gravity():
 	var tmp_grav = Vector2(0,0)
@@ -43,31 +47,33 @@ func overwrite_gravity():
 func apply_gravity(var planet):
 	var planet_direction = Vector2(position.x - planet.position.x, position.y - planet.position.y)
 	var distance = sqrt(pow(planet_direction.x, 2)+pow(planet_direction.y, 2))
+	var sprite = planet.get_node("Sprite")
+	if ((sprite.texture.get_size().x * sprite.scale.x)  / 2 ) > distance:
+		alive = false
 	var normal = Vector2(planet_direction.x/distance, planet_direction.y/distance)
 	if planet.get_G() > distance:
 		return -((planet.G * G)/ pow(distance,2) *  GRAVITY_CONST)*normal
 	return Vector2(0,0)
 
 func process_input( delta ):
-	thrust = 0
-	if Input.is_action_pressed("ui_up") || Input.is_mouse_button_pressed(BUTTON_LEFT):
-		thrust = 1
-		$body/AnimationPlayer.play("thrust")
-		
-	if Input.is_action_pressed("ui_down"):
-		thrust = -1
-		$body/AnimationPlayer.play("thrust")
-
-	if Input.is_action_pressed("ui_left"):
-		angular_velocity -= angular_acc
-	if Input.is_action_pressed("ui_right"):
-		angular_velocity += angular_acc
+	if alive:
+		thrust = 0
+		if Input.is_action_pressed("ui_up") || Input.is_mouse_button_pressed(BUTTON_LEFT):
+			thrust = 1
+			$body/AnimationPlayer.play("thrust")
+		if Input.is_action_pressed("ui_down"):
+			thrust = -1
+			$body/AnimationPlayer.play("thrust")
+		if Input.is_action_pressed("ui_left"):
+			angular_velocity -= angular_acc
+		if Input.is_action_pressed("ui_right"):
+			angular_velocity += angular_acc
 
 func _draw():
 	draw_vector( Vector2(), facing  * 300, Color(1,1,1,0.3), 2 )
 	draw_vector( Vector2(), velocity * 4, Color(1,0,0,0.3), 2 )
 	draw_vector( Vector2(), vector_to_mouse * 0.5, Color(0,1,0,0.3), 2 )
-	draw_vector( Vector2(), gravity*300, Color(1,0,0,0.3), 2 )
+	draw_vector( Vector2(), gravity* 500, Color(1,0,0,0.3), 2 )
 
 func draw_vector( origin, vector, color, arrow_size ):
 	if vector.length_squared() > 1:
