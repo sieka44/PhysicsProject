@@ -1,6 +1,6 @@
 extends Node2D
 
-var G = 10.0
+var G = 100.0
 var velocity = Vector2(0,3)
 
 func acceleration(pos1, pos2, Gforce):
@@ -10,7 +10,7 @@ func acceleration(pos1, pos2, Gforce):
 	return Vector2(normal.x*(Gforce/pow(lenght,2)),normal.y*(Gforce/pow(lenght,2)))
 
 func step_euler(sunCenter, Gforce):
-	var step = 1000
+	var step = 100
 	for i in range(step):
 		var dt = 1.0/step
 		var acc = acceleration(sunCenter, position, Gforce)
@@ -21,3 +21,6 @@ func _process(delta):
 	var planet = get_parent().get_node("planet")
 	step_euler(planet.position, abs(planet.G-G))
 	update()
+	
+func get_G():
+	return G;

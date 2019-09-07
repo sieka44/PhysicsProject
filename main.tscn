@@ -96,12 +96,11 @@ tracks/0/keys = {
 [node name="universe" type="Node"]
 
 [node name="spaceship" type="Node2D" parent="."]
-position = Vector2( 148.652, 190.063 )
+position = Vector2( 426.518, -245.06 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
+"_edit_group_": true
 }
 
 [node name="body" type="Sprite" parent="spaceship"]
@@ -147,25 +146,25 @@ current = true
 [node name="galactic" type="Node2D" parent="."]
 
 [node name="planet" type="Node2D" parent="galactic"]
-position = Vector2( 400, 0 )
+position = Vector2( 497.977, -4.52203 )
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Sprite" type="Sprite" parent="galactic/planet"]
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 7 )
 
 [node name="moon" type="Node2D" parent="galactic"]
-position = Vector2( 533.423, -5.9845 )
+position = Vector2( 650.734, -6.02939 )
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Sprite" type="Sprite" parent="galactic/moon"]
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 9 )
 
 [node name="sun" type="Node2D" parent="galactic"]
